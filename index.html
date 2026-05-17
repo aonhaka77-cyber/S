@@ -85,6 +85,12 @@
             background: rgba(255, 255, 255, 0.84);
             backdrop-filter: blur(22px) saturate(180%);
             border-bottom: 1px solid rgba(232, 234, 237, 0.85);
+            transition: box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .site-header.scrolled {
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
         }
 
         .nav {
@@ -138,6 +144,7 @@
         }
 
         .icon-button {
+            position: relative;
             width: 40px;
             height: 40px;
             display: inline-flex;
@@ -150,6 +157,28 @@
             width: 21px;
             height: 21px;
             stroke-width: 2.25;
+        }
+
+        .cart-count {
+            position: absolute;
+            right: 2px;
+            top: 1px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 5px;
+            border-radius: 999px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 950;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 2px #fff;
+        }
+
+        .cart-count.visible {
+            display: flex;
         }
 
         .mobile-menu {
@@ -209,6 +238,345 @@
             background: #eef2f7;
             font-weight: 800;
             font-size: 13px;
+        }
+
+        .search-results {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .search-result {
+            text-align: left;
+            padding: 16px;
+            border-radius: 18px;
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+        }
+
+        .search-result strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .search-result span {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 180;
+            background: rgba(0,0,0,0.38);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .drawer,
+        .modal {
+            position: fixed;
+            z-index: 220;
+            background: #fff;
+            box-shadow: 0 36px 100px rgba(0,0,0,0.22);
+            transition: transform 0.28s ease, opacity 0.28s ease;
+        }
+
+        .drawer {
+            top: 0;
+            right: 0;
+            width: min(440px, 100vw);
+            height: 100vh;
+            padding: 24px;
+            transform: translateX(105%);
+            overflow-y: auto;
+        }
+
+        .drawer.open {
+            transform: translateX(0);
+        }
+
+        .mobile-drawer {
+            left: 0;
+            right: auto;
+            transform: translateX(-105%);
+        }
+
+        .mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-head,
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .drawer-head h2,
+        .modal-head h2 {
+            font-size: 28px;
+            font-weight: 950;
+        }
+
+        .close-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--soft);
+            display: grid;
+            place-items: center;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .mobile-nav-list {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .mobile-nav-list a {
+            padding: 18px;
+            border-radius: 20px;
+            background: var(--soft);
+            font-size: 20px;
+            font-weight: 950;
+        }
+
+        .drawer-block {
+            padding: 18px;
+            border-radius: 22px;
+            background: var(--soft);
+            margin-bottom: 12px;
+        }
+
+        .drawer-block strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .drawer-block p {
+            color: var(--muted);
+            line-height: 1.45;
+            font-weight: 650;
+            font-size: 14px;
+        }
+
+        .cart-list {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 64px 1fr auto;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            border-radius: 20px;
+            border: 1px solid var(--line);
+        }
+
+        .cart-thumb {
+            height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #eaf2ff, #c8ddff);
+            display: grid;
+            place-items: center;
+            font-weight: 950;
+            color: var(--blue-dark);
+        }
+
+        .cart-item h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item p {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 750;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .qty-control button {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--soft);
+            font-weight: 950;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-top: 1px solid var(--line);
+            font-size: 20px;
+            font-weight: 950;
+        }
+
+        .modal {
+            left: 50%;
+            top: 50%;
+            width: min(760px, calc(100vw - 32px));
+            max-height: calc(100vh - 32px);
+            overflow-y: auto;
+            border-radius: 34px;
+            padding: 28px;
+            transform: translate(-50%, -46%) scale(0.96);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .modal.open {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .modal-visual {
+            min-height: 360px;
+            border-radius: 28px;
+            background: linear-gradient(145deg, #f2f6ff, #dce9ff);
+            display: grid;
+            place-items: center;
+        }
+
+        .modal-device {
+            width: 160px;
+            height: 260px;
+            border-radius: 30px;
+            background: radial-gradient(circle at 42% 30%, #fff 0 4%, transparent 5%), linear-gradient(135deg, #0b5cff, #050505);
+            box-shadow: inset 0 0 0 10px #111, 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .modal-copy h3 {
+            font-size: clamp(32px, 5vw, 54px);
+            line-height: 1;
+            font-weight: 950;
+            margin-bottom: 14px;
+        }
+
+        .modal-copy p {
+            color: var(--muted);
+            line-height: 1.6;
+            font-weight: 650;
+            margin-bottom: 18px;
+        }
+
+        .option-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 22px;
+        }
+
+        .option {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-weight: 850;
+        }
+
+        .option.active {
+            color: #fff;
+            background: #000;
+            border-color: #000;
+        }
+
+        .account-form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field label {
+            font-size: 13px;
+            font-weight: 950;
+        }
+
+        .field input {
+            min-height: 52px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 0 16px;
+            outline: 0;
+            font-weight: 750;
+        }
+
+        .compare-dock {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            z-index: 160;
+            width: min(860px, calc(100vw - 32px));
+            padding: 12px;
+            border-radius: 26px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.16);
+            transform: translate(-50%, 150%);
+            transition: transform 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .compare-dock.open {
+            transform: translate(-50%, 0);
+        }
+
+        .compare-dock strong {
+            font-size: 14px;
+        }
+
+        .compare-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .compare-chip {
+            padding: 8px 11px;
+            border-radius: 999px;
+            background: var(--soft);
+            font-size: 12px;
+            font-weight: 900;
         }
 
         main {
@@ -917,6 +1285,10 @@
             margin-top: auto;
         }
 
+        .phone-card .pill + .pill {
+            margin-top: 10px;
+        }
+
         .shop {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1283,6 +1655,24 @@
                 min-height: 46px;
             }
 
+            .search-results,
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-visual {
+                min-height: 260px;
+            }
+
+            .drawer {
+                width: 100vw;
+            }
+
+            .compare-dock {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
             }
@@ -1307,10 +1697,11 @@
                 <button class="search-toggle icon-button" id="searchToggle" aria-label="검색 열기">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
                 </button>
-                <button class="icon-button" aria-label="장바구니" data-toast="장바구니가 열렸습니다.">
+                <button class="icon-button" id="cartButton" aria-label="장바구니 열기">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 8h15l-2 9H8L6 4H3"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
+                    <span class="cart-count" id="cartCount">0</span>
                 </button>
-                <button class="icon-button" aria-label="계정" data-toast="삼성 계정 화면으로 이동합니다.">
+                <button class="icon-button" id="accountButton" aria-label="계정 열기">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.8-4 5-6 8-6s6.2 2 8 6"></path></svg>
                 </button>
                 <button class="mobile-menu icon-button" id="mobileMenu" aria-label="모바일 메뉴">
@@ -1333,6 +1724,7 @@
                 <button data-search="OLED TV">OLED TV</button>
                 <button data-search="Galaxy Watch">Galaxy Watch</button>
             </div>
+            <div class="search-results" id="searchResults"></div>
         </div>
     </aside>
 
@@ -1394,7 +1786,7 @@
                     <div>
                         <h3>Galaxy S Ultra<br>with Galaxy AI</h3>
                         <p>밤에도 또렷한 카메라와 강력한 AI 편집 기능으로 순간을 작품처럼 남깁니다.</p>
-                        <button class="mini-link" data-toast="Galaxy S Ultra 상세 페이지로 이동합니다.">자세히 보기</button>
+                        <button class="mini-link" data-product="ultra">자세히 보기</button>
                     </div>
                     <div class="product-art"></div>
                 </article>
@@ -1403,7 +1795,7 @@
                     <div>
                         <h3>Neo QLED 8K</h3>
                         <p>AI 업스케일링과 풍부한 명암으로 거실을 프리미엄 시네마처럼.</p>
-                        <button class="mini-link" data-toast="Neo QLED 혜택을 확인합니다.">혜택 보기</button>
+                        <button class="mini-link" data-product="qled">혜택 보기</button>
                     </div>
                     <div class="product-art tv"></div>
                 </article>
@@ -1412,7 +1804,7 @@
                     <div>
                         <h3>Bespoke AI</h3>
                         <p>공간과 취향에 맞춰 조용하고 똑똑하게 움직이는 홈 라이프.</p>
-                        <button class="mini-link" data-toast="Bespoke AI 컬렉션을 열었습니다.">컬렉션 보기</button>
+                        <button class="mini-link" data-product="bespoke">컬렉션 보기</button>
                     </div>
                     <div class="product-art appliance"></div>
                 </article>
@@ -1421,7 +1813,7 @@
                     <div>
                         <h3>Galaxy Book</h3>
                         <p>얇고 가벼운 바디, 넓은 디스플레이, 모바일과 매끄러운 연결.</p>
-                        <button class="mini-link" data-toast="Galaxy Book 비교표를 준비했습니다.">비교하기</button>
+                        <button class="mini-link" data-compare="Galaxy Book">비교하기</button>
                     </div>
                     <div class="product-art laptop"></div>
                 </article>
@@ -1430,7 +1822,7 @@
                     <div>
                         <h3>Galaxy Ring</h3>
                         <p>수면, 회복, 활동을 작고 정교하게 기록하는 웰니스 디바이스.</p>
-                        <button class="mini-link" data-toast="Galaxy Ring 알림 신청이 완료되었습니다.">알림 신청</button>
+                        <button class="mini-link" data-product="ring">알림 신청</button>
                     </div>
                     <div class="product-art ring"></div>
                 </article>
@@ -1515,7 +1907,8 @@
                             <li><span>배터리</span><strong>5,000 mAh</strong></li>
                             <li><span>AI</span><strong>Galaxy AI Pro</strong></li>
                         </ul>
-                        <button class="pill primary" data-toast="Galaxy S Ultra를 장바구니에 담았습니다.">구매하기</button>
+                        <button class="pill primary" data-buy="ultra">구매하기</button>
+                        <button class="pill secondary" data-compare="Galaxy S Ultra">비교 담기</button>
                     </article>
 
                     <article class="phone-card reveal">
@@ -1528,7 +1921,8 @@
                             <li><span>멀티태스킹</span><strong>3 Apps View</strong></li>
                             <li><span>S Pen</span><strong>지원</strong></li>
                         </ul>
-                        <button class="pill primary" data-toast="Galaxy Z Fold를 장바구니에 담았습니다.">구매하기</button>
+                        <button class="pill primary" data-buy="fold">구매하기</button>
+                        <button class="pill secondary" data-compare="Galaxy Z Fold">비교 담기</button>
                     </article>
 
                     <article class="phone-card reveal">
@@ -1541,7 +1935,8 @@
                             <li><span>방수방진</span><strong>IP68</strong></li>
                             <li><span>색상</span><strong>4 Colors</strong></li>
                         </ul>
-                        <button class="pill primary" data-toast="Galaxy FE를 장바구니에 담았습니다.">구매하기</button>
+                        <button class="pill primary" data-buy="fe">구매하기</button>
+                        <button class="pill secondary" data-compare="Galaxy FE">비교 담기</button>
                     </article>
                 </div>
             </div>
@@ -1639,70 +2034,489 @@
         </div>
     </footer>
 
+    <div class="overlay" id="pageOverlay"></div>
+
+    <aside class="drawer mobile-drawer" id="mobileDrawer" aria-hidden="true">
+        <div class="drawer-head">
+            <h2>Menu</h2>
+            <button class="close-button" data-close="mobileDrawer" aria-label="메뉴 닫기">×</button>
+        </div>
+        <nav class="mobile-nav-list" aria-label="모바일 메뉴">
+            <a href="#mobile">Mobile</a>
+            <a href="#tv">TV & Audio</a>
+            <a href="#home">Home Appliances</a>
+            <a href="#ai">AI</a>
+            <a href="#offers">Offers</a>
+            <a href="#support">Support</a>
+        </nav>
+        <div class="drawer-block">
+            <strong>오늘의 추천</strong>
+            <p>Galaxy AI 신제품, Bespoke 패키지, Neo QLED 할인 혜택을 한 번에 확인하세요.</p>
+        </div>
+        <div class="drawer-block">
+            <strong>빠른 지원</strong>
+            <p>제품 등록, 서비스 예약, 매뉴얼 다운로드 기능을 데모로 제공합니다.</p>
+        </div>
+    </aside>
+
+    <aside class="drawer" id="cartDrawer" aria-hidden="true">
+        <div class="drawer-head">
+            <h2>장바구니</h2>
+            <button class="close-button" data-close="cartDrawer" aria-label="장바구니 닫기">×</button>
+        </div>
+        <div class="cart-list" id="cartList"></div>
+        <div class="cart-total">
+            <span>총 결제 예상</span>
+            <strong id="cartTotal">0원</strong>
+        </div>
+        <button class="pill primary" id="checkoutButton" style="width:100%;">주문서 작성</button>
+        <button class="pill secondary" id="clearCartButton" style="width:100%; margin-top:10px;">비우기</button>
+    </aside>
+
+    <section class="modal" id="accountModal" aria-hidden="true">
+        <div class="modal-head">
+            <h2>Samsung Account</h2>
+            <button class="close-button" data-close="accountModal" aria-label="계정 닫기">×</button>
+        </div>
+        <form class="account-form" id="accountForm">
+            <div class="field">
+                <label for="accountEmail">이메일</label>
+                <input id="accountEmail" type="email" placeholder="you@example.com">
+            </div>
+            <div class="field">
+                <label for="accountPassword">비밀번호</label>
+                <input id="accountPassword" type="password" placeholder="8자 이상">
+            </div>
+            <button class="pill primary" type="submit">로그인</button>
+        </form>
+        <div class="drawer-block" style="margin-top:18px;">
+            <strong>로그인 데모</strong>
+            <p>실제 서버 연결 없이 입력값 검증과 로그인 상태 표시만 구현되어 있습니다.</p>
+        </div>
+    </section>
+
+    <section class="modal" id="productModal" aria-hidden="true">
+        <div class="modal-head">
+            <h2 id="modalTitle">제품 상세</h2>
+            <button class="close-button" data-close="productModal" aria-label="제품 상세 닫기">×</button>
+        </div>
+        <div class="modal-grid">
+            <div class="modal-visual"><div class="modal-device" id="modalDevice"></div></div>
+            <div class="modal-copy">
+                <h3 id="modalName">Galaxy</h3>
+                <p id="modalDesc">제품 설명</p>
+                <strong id="modalPrice">0원</strong>
+                <div class="option-row" id="modalOptions"></div>
+                <button class="pill primary" id="modalBuyButton">장바구니 담기</button>
+                <button class="pill secondary" id="modalCompareButton">비교 담기</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="compare-dock" id="compareDock">
+        <div>
+            <strong>비교함</strong>
+            <div class="compare-items" id="compareItems"></div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="pill primary" id="compareButton">비교 보기</button>
+            <button class="pill secondary" id="clearCompareButton">초기화</button>
+        </div>
+    </div>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        const searchToggle = document.getElementById("searchToggle");
-        const searchPanel = document.getElementById("searchPanel");
-        const searchInput = document.getElementById("searchInput");
-        const toast = document.getElementById("toast");
-        const tabs = document.querySelectorAll(".tab");
-        const products = document.querySelectorAll(".product");
-        const revealItems = document.querySelectorAll(".reveal");
-        const newsletterForm = document.getElementById("newsletterForm");
-        const emailInput = document.getElementById("emailInput");
+        const productsData = {
+            ultra: {
+                name: "Galaxy S Ultra",
+                category: "Mobile",
+                price: 1599400,
+                desc: "200MP 카메라, Galaxy AI, 티타늄 프레임을 갖춘 플래그십 스마트폰입니다.",
+                options: ["Titanium Black", "Titanium Silver", "512GB", "1TB"],
+                tone: "linear-gradient(135deg, #0b5cff, #050505)"
+            },
+            fold: {
+                name: "Galaxy Z Fold",
+                category: "Mobile",
+                price: 2229700,
+                desc: "큰 화면 멀티태스킹과 접히는 폼팩터로 업무와 콘텐츠 감상을 모두 잡았습니다.",
+                options: ["Navy", "Silver Shadow", "256GB", "512GB"],
+                tone: "linear-gradient(90deg, #111 0 49%, #3f3f46 50% 51%, #0b5cff 52% 100%)"
+            },
+            fe: {
+                name: "Galaxy FE",
+                category: "Mobile",
+                price: 899800,
+                desc: "핵심 Galaxy 경험을 합리적인 가격으로 즐길 수 있는 팬 에디션입니다.",
+                options: ["Mint", "Graphite", "128GB", "256GB"],
+                tone: "linear-gradient(135deg, #8b5cf6, #0f172a)"
+            },
+            qled: {
+                name: "Neo QLED 8K",
+                category: "TV & Audio",
+                price: 4890000,
+                desc: "AI 업스케일링과 풍부한 명암비로 거실을 몰입형 시네마로 바꿉니다.",
+                options: ["65 inch", "75 inch", "85 inch", "Wall Mount"],
+                tone: "linear-gradient(135deg, #08111f, #1765ff 45%, #a6f3ff)"
+            },
+            bespoke: {
+                name: "Bespoke AI Combo",
+                category: "Home Appliances",
+                price: 3290000,
+                desc: "세탁과 건조, 에너지 관리까지 하나의 똑똑한 홈 루틴으로 연결합니다.",
+                options: ["Satin White", "Satin Beige", "24kg", "Care+ 포함"],
+                tone: "linear-gradient(145deg, #f9fafb, #cfd8e3)"
+            },
+            ring: {
+                name: "Galaxy Ring",
+                category: "Wearable",
+                price: 499000,
+                desc: "수면, 회복, 활동 데이터를 작고 정교한 웨어러블로 기록합니다.",
+                options: ["Black", "Silver", "Gold", "Size Kit"],
+                tone: "radial-gradient(circle, transparent 0 44%, #111 45% 52%, #f7fafc 53% 67%, #64748b 68% 100%)"
+            },
+            book: {
+                name: "Galaxy Book",
+                category: "PC",
+                price: 1890000,
+                desc: "Galaxy 모바일과 자연스럽게 이어지는 얇고 가벼운 생산성 노트북입니다.",
+                options: ["14 inch", "16 inch", "Intel Core Ultra", "1TB"],
+                tone: "linear-gradient(135deg, #111, #94a3b8)"
+            }
+        };
+
+        const state = {
+            cart: [],
+            compare: [],
+            activeProduct: "ultra",
+            signedIn: false
+        };
+
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => document.querySelectorAll(selector);
+        const formatWon = (value) => `${Number(value).toLocaleString("ko-KR")}원`;
+
+        const els = {
+            searchToggle: $("#searchToggle"),
+            searchPanel: $("#searchPanel"),
+            searchInput: $("#searchInput"),
+            searchResults: $("#searchResults"),
+            toast: $("#toast"),
+            overlay: $("#pageOverlay"),
+            cartButton: $("#cartButton"),
+            accountButton: $("#accountButton"),
+            mobileMenu: $("#mobileMenu"),
+            mobileDrawer: $("#mobileDrawer"),
+            cartDrawer: $("#cartDrawer"),
+            cartCount: $("#cartCount"),
+            cartList: $("#cartList"),
+            cartTotal: $("#cartTotal"),
+            accountModal: $("#accountModal"),
+            productModal: $("#productModal"),
+            modalTitle: $("#modalTitle"),
+            modalName: $("#modalName"),
+            modalDesc: $("#modalDesc"),
+            modalPrice: $("#modalPrice"),
+            modalOptions: $("#modalOptions"),
+            modalDevice: $("#modalDevice"),
+            modalBuyButton: $("#modalBuyButton"),
+            modalCompareButton: $("#modalCompareButton"),
+            compareDock: $("#compareDock"),
+            compareItems: $("#compareItems"),
+            newsletterForm: $("#newsletterForm"),
+            emailInput: $("#emailInput")
+        };
 
         let toastTimer = null;
 
         function showToast(message) {
             clearTimeout(toastTimer);
-            toast.textContent = message;
-            toast.classList.add("show");
-            toastTimer = setTimeout(() => {
-                toast.classList.remove("show");
-            }, 2500);
+            els.toast.textContent = message;
+            els.toast.classList.add("show");
+            toastTimer = setTimeout(() => els.toast.classList.remove("show"), 2600);
+        }
+
+        function openLayer(id) {
+            closeSearch();
+            els.overlay.classList.add("open");
+            const layer = document.getElementById(id);
+            layer.classList.add("open");
+            layer.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeLayer(id) {
+            const layer = document.getElementById(id);
+            if (!layer) return;
+            layer.classList.remove("open");
+            layer.setAttribute("aria-hidden", "true");
+            if (!document.querySelector(".drawer.open, .modal.open")) {
+                els.overlay.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+        }
+
+        function closeAllLayers() {
+            $$(".drawer.open, .modal.open").forEach((layer) => closeLayer(layer.id));
+            els.overlay.classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        function openSearch() {
+            els.searchPanel.classList.add("open");
+            els.searchPanel.setAttribute("aria-hidden", "false");
+            els.searchToggle.setAttribute("aria-label", "검색 닫기");
+            setTimeout(() => els.searchInput.focus(), 120);
+            renderSearchResults(els.searchInput.value);
+        }
+
+        function closeSearch() {
+            els.searchPanel.classList.remove("open");
+            els.searchPanel.setAttribute("aria-hidden", "true");
+            els.searchToggle.setAttribute("aria-label", "검색 열기");
         }
 
         function toggleSearch() {
-            const isOpen = searchPanel.classList.toggle("open");
-            searchPanel.setAttribute("aria-hidden", String(!isOpen));
-            searchToggle.setAttribute("aria-label", isOpen ? "검색 닫기" : "검색 열기");
-            if (isOpen) {
-                setTimeout(() => searchInput.focus(), 120);
-            }
+            els.searchPanel.classList.contains("open") ? closeSearch() : openSearch();
         }
 
-        searchToggle.addEventListener("click", toggleSearch);
+        function renderSearchResults(query = "") {
+            const keyword = query.trim().toLowerCase();
+            const matches = Object.entries(productsData).filter(([, product]) => {
+                const haystack = `${product.name} ${product.category} ${product.desc}`.toLowerCase();
+                return !keyword || haystack.includes(keyword);
+            }).slice(0, 6);
 
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && searchPanel.classList.contains("open")) {
-                toggleSearch();
+            els.searchResults.innerHTML = matches.map(([id, product]) => `
+                <button class="search-result" data-result="${id}">
+                    <strong>${product.name}</strong>
+                    <span>${product.category} · ${formatWon(product.price)}</span>
+                </button>
+            `).join("");
+        }
+
+        function openProduct(id) {
+            const product = productsData[id];
+            if (!product) return;
+            state.activeProduct = id;
+            els.modalTitle.textContent = product.category;
+            els.modalName.textContent = product.name;
+            els.modalDesc.textContent = product.desc;
+            els.modalPrice.textContent = formatWon(product.price);
+            els.modalDevice.style.background = product.tone;
+            els.modalOptions.innerHTML = product.options.map((option, index) => `
+                <button class="option ${index === 0 ? "active" : ""}" type="button">${option}</button>
+            `).join("");
+            openLayer("productModal");
+        }
+
+        function addToCart(id) {
+            const product = productsData[id];
+            if (!product) return;
+            const existing = state.cart.find((item) => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                state.cart.push({ id, qty: 1 });
+            }
+            renderCart();
+            showToast(`${product.name}을 장바구니에 담았습니다.`);
+        }
+
+        function changeQty(id, delta) {
+            const item = state.cart.find((entry) => entry.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                state.cart = state.cart.filter((entry) => entry.id !== id);
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const totalQty = state.cart.reduce((sum, item) => sum + item.qty, 0);
+            const total = state.cart.reduce((sum, item) => sum + productsData[item.id].price * item.qty, 0);
+            els.cartCount.textContent = totalQty;
+            els.cartCount.classList.toggle("visible", totalQty > 0);
+            els.cartTotal.textContent = formatWon(total);
+
+            if (!state.cart.length) {
+                els.cartList.innerHTML = `
+                    <div class="drawer-block">
+                        <strong>장바구니가 비어 있습니다</strong>
+                        <p>마음에 드는 Galaxy 제품을 담으면 이곳에서 수량과 총액을 확인할 수 있습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            els.cartList.innerHTML = state.cart.map((item) => {
+                const product = productsData[item.id];
+                return `
+                    <article class="cart-item">
+                        <div class="cart-thumb">${product.name.split(" ").at(-1)}</div>
+                        <div>
+                            <h3>${product.name}</h3>
+                            <p>${formatWon(product.price)}</p>
+                            <div class="qty-control">
+                                <button data-qty="${item.id}" data-delta="-1" aria-label="수량 감소">−</button>
+                                <strong>${item.qty}</strong>
+                                <button data-qty="${item.id}" data-delta="1" aria-label="수량 증가">+</button>
+                            </div>
+                        </div>
+                        <strong>${formatWon(product.price * item.qty)}</strong>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        function addCompare(name) {
+            if (!state.compare.includes(name)) {
+                state.compare.push(name);
+            }
+            if (state.compare.length > 3) {
+                state.compare.shift();
+            }
+            renderCompare();
+            showToast(`${name}을 비교함에 담았습니다.`);
+        }
+
+        function renderCompare() {
+            els.compareDock.classList.toggle("open", state.compare.length > 0);
+            els.compareItems.innerHTML = state.compare.map((name) => `<span class="compare-chip">${name}</span>`).join("");
+        }
+
+        els.searchToggle.addEventListener("click", toggleSearch);
+        els.searchInput.addEventListener("input", (event) => renderSearchResults(event.target.value));
+        els.cartButton.addEventListener("click", () => openLayer("cartDrawer"));
+        els.accountButton.addEventListener("click", () => openLayer("accountModal"));
+        els.mobileMenu.addEventListener("click", () => openLayer("mobileDrawer"));
+        els.overlay.addEventListener("click", closeAllLayers);
+
+        $$(".close-button").forEach((button) => {
+            button.addEventListener("click", () => closeLayer(button.dataset.close));
+        });
+
+        $$(".mobile-nav-list a").forEach((link) => {
+            link.addEventListener("click", closeAllLayers);
+        });
+
+        document.addEventListener("click", (event) => {
+            const toastButton = event.target.closest("[data-toast]");
+            if (toastButton) showToast(toastButton.dataset.toast);
+
+            const result = event.target.closest("[data-result]");
+            if (result) openProduct(result.dataset.result);
+
+            const productButton = event.target.closest("[data-product]");
+            if (productButton) openProduct(productButton.dataset.product);
+
+            const buyButton = event.target.closest("[data-buy]");
+            if (buyButton) addToCart(buyButton.dataset.buy);
+
+            const compareButton = event.target.closest("[data-compare]");
+            if (compareButton) addCompare(compareButton.dataset.compare);
+
+            const qtyButton = event.target.closest("[data-qty]");
+            if (qtyButton) changeQty(qtyButton.dataset.qty, Number(qtyButton.dataset.delta));
+
+            const option = event.target.closest(".option");
+            if (option) {
+                option.parentElement.querySelectorAll(".option").forEach((item) => item.classList.remove("active"));
+                option.classList.add("active");
             }
         });
 
-        document.querySelectorAll("[data-toast]").forEach((element) => {
-            element.addEventListener("click", () => showToast(element.dataset.toast));
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeSearch();
+                closeAllLayers();
+            }
         });
 
-        document.querySelectorAll("[data-search]").forEach((button) => {
+        $$("[data-search]").forEach((button) => {
             button.addEventListener("click", () => {
-                searchInput.value = button.dataset.search;
-                showToast(`"${button.dataset.search}" 검색 결과를 준비했습니다.`);
+                els.searchInput.value = button.dataset.search;
+                renderSearchResults(button.dataset.search);
+                showToast(`"${button.dataset.search}" 검색 결과를 불러왔습니다.`);
             });
         });
 
-        tabs.forEach((tab) => {
+        $$(".tab").forEach((tab) => {
             tab.addEventListener("click", () => {
                 const filter = tab.dataset.filter;
-                tabs.forEach((item) => item.classList.remove("active"));
+                $$(".tab").forEach((item) => item.classList.remove("active"));
                 tab.classList.add("active");
-
-                products.forEach((product) => {
+                $$(".product").forEach((product) => {
                     const visible = filter === "all" || product.dataset.kind === filter;
                     product.style.display = visible ? "flex" : "none";
                 });
             });
         });
+
+        $("#modalBuyButton").addEventListener("click", () => {
+            addToCart(state.activeProduct);
+            closeLayer("productModal");
+            openLayer("cartDrawer");
+        });
+
+        $("#modalCompareButton").addEventListener("click", () => {
+            addCompare(productsData[state.activeProduct].name);
+        });
+
+        $("#checkoutButton").addEventListener("click", () => {
+            if (!state.cart.length) {
+                showToast("장바구니에 제품을 먼저 담아주세요.");
+                return;
+            }
+            showToast("주문서 작성 단계로 이동합니다. 데모 결제는 여기까지입니다.");
+        });
+
+        $("#clearCartButton").addEventListener("click", () => {
+            state.cart = [];
+            renderCart();
+            showToast("장바구니를 비웠습니다.");
+        });
+
+        $("#compareButton").addEventListener("click", () => {
+            showToast(`${state.compare.join(", ")} 비교표를 준비했습니다.`);
+        });
+
+        $("#clearCompareButton").addEventListener("click", () => {
+            state.compare = [];
+            renderCompare();
+            showToast("비교함을 초기화했습니다.");
+        });
+
+        $("#accountForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+            const email = $("#accountEmail").value.trim();
+            const password = $("#accountPassword").value.trim();
+            if (!email || password.length < 8) {
+                showToast("이메일과 8자 이상 비밀번호를 입력해주세요.");
+                return;
+            }
+            state.signedIn = true;
+            closeLayer("accountModal");
+            showToast("Samsung Account 로그인 데모가 완료되었습니다.");
+        });
+
+        els.newsletterForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const email = els.emailInput.value.trim();
+            if (!email || !email.includes("@")) {
+                showToast("올바른 이메일 주소를 입력해주세요.");
+                els.emailInput.focus();
+                return;
+            }
+            showToast("신제품 소식 구독이 완료되었습니다.");
+            els.emailInput.value = "";
+        });
+
+        window.addEventListener("scroll", () => {
+            $(".site-header").classList.toggle("scrolled", window.scrollY > 8);
+        }, { passive: true });
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -1713,23 +2527,10 @@
             });
         }, { threshold: 0.14 });
 
-        revealItems.forEach((item) => observer.observe(item));
-
-        newsletterForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const email = emailInput.value.trim();
-            if (!email) {
-                showToast("이메일 주소를 입력해주세요.");
-                emailInput.focus();
-                return;
-            }
-            showToast("구독 신청이 완료되었습니다.");
-            emailInput.value = "";
-        });
-
-        document.getElementById("mobileMenu").addEventListener("click", () => {
-            showToast("모바일 메뉴 데모입니다. 큰 화면에서는 상단 메뉴를 확인하세요.");
-        });
+        $$(".reveal").forEach((item) => observer.observe(item));
+        renderSearchResults();
+        renderCart();
+        renderCompare();
     </script>
 </body>
 </html>
